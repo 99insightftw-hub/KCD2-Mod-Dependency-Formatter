@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 80 80" shape-rendering="crispEdges">
+ <rect width="80" height="80" fill="#141617"/>
+ <defs>
+  <g id="link">
+   <path fill="#090a0b" d="M0 6H4V2H8V0H20V4H24V8H28V20H24V24H20V28H8V24H4V20H0Z"/>
+   <path fill="#353a3f" fill-rule="evenodd" d="M2 8H6V4H10V2H18V6H22V10H26V18H22V22H18V26H10V22H6V18H2ZM8 10V16H12V20H16V18H18V14H20V12H16V8H12V6H10V10Z"/>
+   <path fill="#555c63" d="M2 8H6V4H10V2H16V4H10V6H8V10H4V16H2Z"/>
+   <path fill="#24292d" d="M18 22H22V18H24V12H26V18H22V22H18V26H10V24H18Z"/>
+   <path fill="#62686d" d="M8 6H10V8H8ZM4 10H6V14H4Z"/>
+  </g>
+ </defs>
+ <g>
+  <use href="#link" x="-12" y="-12"/>
+  <use href="#link" x="8" y="8"/>
+  <use href="#link" x="28" y="28"/>
+  <use href="#link" x="48" y="48"/>
+  <use href="#link" x="68" y="68"/>
+  <use href="#link" x="68" y="-12"/>
+  <use href="#link" x="-12" y="68"/>
+ </g>
+</svg>

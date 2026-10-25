@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KCD2 Mod Dependency Formatter</title>
+<link rel="icon" href="assets/app/kcd2-icon.ico">
+<link rel="stylesheet" href="setup.css"><link rel="stylesheet" href="win95.css">
+</head>
+<body id="page-top">
+<header class="masthead">
+  <a class="brand-mark tape-top" href="#page-top" aria-label="Back to top" title="Back to top"><img src="assets/app/header-pixel.png" alt="" width="64" height="64"></a>
+  <div class="brand-copy"><p class="eyebrow">KCD2</p><h1>Mod Dependency Formatter</h1><p class="intro">Automatic checks. Clear results. Review changes before installing.</p></div>
+  <div class="system-stamp"><span class="system-caption">Mod Dependency Formatter Menu</span><span class="version">1.0.0</span></div>
+  <label class="language-control" for="languageSelect"><span>Language</span><span class="language-options"><svg class="language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false" translate="no"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5h14M5 17.5h14"/></svg><select id="languageSelect" aria-label="Language"><option value="en">English</option><option value="cs">Čeština</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="ru">Русский</option><option value="pt-BR">Português (Brasil)</option><option value="zh-CN">简体中文</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="tr">Türkçe</option></select></span></label>
+  <a class="header-icon tape-top" href="#page-top" aria-label="Back to top" title="Back to top"><img src="assets/app/header-pixel.png" alt="" width="96" height="96"></a>
+</header>
+<div class="console-shell">
+<nav class="console-menu" aria-label="Main menu">
+  <p class="menu-caption">MAIN MENU</p>
+  <button id="nav-game" class="console-nav-button" data-section="game-panel" aria-current="location"><span class="menu-number">01</span> Game</button>
+  <button id="nav-plugins" class="console-nav-button" data-section="plugins-panel"><span class="menu-number">02</span> Dependencies</button>
+</nav>
+<main>
+<section id="dependency-alert" class="dependency-alert" aria-labelledby="dependency-alert-title" hidden><h2 id="dependency-alert-title">Required dependency missing</h2><p id="dependency-alert-summary"></p><div id="dependency-alert-items"></div><details><summary>Choose a download manually</summary><button id="dependency-alert-choose">Choose downloaded ZIP or 7z…</button></details></section>
+<p id="stale-review-notice" class="stale-review-notice" hidden>Mods changed; review files and mod list again before making a change.</p>
+<section id="game-panel" class="panel" aria-labelledby="game-title">
+  <div class="section-heading"><span class="step">1</span><div><h2 id="game-title">Your game</h2><p>Your game and dependencies are checked automatically.</p></div></div>
+  <p id="game-selected" class="small" hidden></p>
+  <div class="actions"><button id="browse" class="primary">Choose game folder…</button><button id="retry-check" class="primary" hidden>Retry check</button><button id="cancel" class="quiet" hidden>Cancel</button></div>
+  <div id="choices" class="choices"></div>
+  <div role="status" aria-live="polite" aria-atomic="true"><p id="launch-status" class="small">Automatic scan in progress…</p><ul id="launch-needs" class="small"></ul></div>
+  <div class="actions"><button id="launch-devmode">Launch game with -devmode</button></div>
+  <details id="game-advanced"><summary>Advanced options</summary>
+  <label for="game">Game folder or KingdomCome.exe</label><div class="folder-row"><input id="game" spellcheck="false" placeholder="Looking for your installation…"><button id="change-game">Change folder…</button></div>
+  <div class="actions"><button id="scan" aria-describedby="scan-recommendation startup-policy">Check dependencies now</button><button id="detect" class="quiet">Find automatically</button><button id="browse-exe" class="quiet">Choose KingdomCome.exe…</button></div>
+  <p id="scan-recommendation" class="small">Dependencies are checked automatically on opening and when mod files change. Use a manual check if you need one.</p>
+  <p id="startup-policy" class="small">A missing mod_order.txt is created only when safe. Existing lists are preserved. Vortex and Workshop content stays under its manager’s control.</p>
+  </details>
+  <div id="order-startup" class="notice order-startup" role="status" aria-live="polite" hidden></div>
+  <p id="monitoring-notice" class="notice" role="status" aria-live="polite" hidden>Automatic checking could not finish. Results below may be out of date. Let Steam or Vortex finish its changes, then choose Retry check. The app will also keep trying automatically.</p>
+  <div id="status" class="status" role="status" aria-live="polite">Looking for your game…</div>
+</section>
+<section id="plugins-panel" class="panel dependency-simple" aria-labelledby="dependencies-title">
+  <div class="section-heading"><span class="step">2</span><div><h2 id="dependencies-title">Dependencies</h2><p id="summary">Your results will appear here after the check.</p></div></div>
+  <div class="actions" role="group" aria-label="Dependency view"><button id="dependencies-simple" aria-pressed="true">Simple</button><button id="dependencies-detailed" aria-pressed="false">Detailed</button></div><p id="dependency-mode-help" class="small">Dependencies used by your mods. Missing files are marked below.</p>
+  <p class="result-scope">These results check files and load order. Start the game to see whether each plugin works. Optional plugins can stay uninstalled.</p>
+  <aside id="workshop-note" class="notice manager-note" aria-label="Steam Workshop information" hidden></aside>
+  <aside id="manager-note" class="notice manager-note" aria-label="Vortex deployment information" hidden></aside>
+  <section id="findings-panel" class="findings-panel" aria-labelledby="findings-title" hidden><h3 id="findings-title">Items to check</h3><p id="findings-summary" class="small"></p><details id="findings-details"><summary id="findings-toggle">Show findings</summary><div id="findings-list"></div></details></section>
+  <div id="dependencies" class="dependency-grid"><p class="small">Check your game to see supported dependencies.</p></div>
+  <details id="runtime-evidence" class="runtime-evidence"><summary>Messages from the game</summary><div id="runtime-evidence-body"><p class="small">Check your game to look for game log clues.</p></div></details>
+  <p class="small">Download buttons open each author’s page. Choose a file that works with your game version.</p>
+  <section id="download-section" class="downloads" aria-labelledby="downloads-title"><h3 id="downloads-title">Your downloads</h3><p id="download-guidance">Download a needed dependency from its author. Save the ZIP or 7z file in the folder below; you do not need to extract it.</p><aside id="after-download-guide" class="notice" aria-labelledby="after-download-title"><h4 id="after-download-title">After downloading</h4><ol><li>Save the author's ZIP or 7z in Downloads. Leave it zipped; the app extracts supported files for you.</li><li>Return here. If your download is not listed, open Advanced options, choose Choose ZIP or 7z…, and select the file from Downloads or your Desktop.</li><li>Review the files, close the game, then choose Install and format files or Install with Vortex.</li></ol></aside><details id="download-folders-details"><summary>Folders being checked</summary><p id="download-folder" class="watched-folder">Check your game to find your Downloads folder.</p></details><details id="downloads-advanced"><summary>Advanced options</summary><div class="actions"><button id="choose-download-folder">Choose download folder…</button><button id="refresh-downloads" class="quiet">Refresh</button><button id="download" class="quiet">Choose ZIP or 7z…</button><button id="choose-extracted" class="quiet">Choose extracted folder…</button></div></details><p id="download-watch-status" class="small" role="status" aria-live="polite">Downloads are checked automatically while this app is open.</p><p class="small">One clearly matched download for a missing required dependency is checked automatically. Multiple matching downloads stay yours to choose. Files are installed only after you review them.</p><div id="download-candidates"></div><section id="vortex-connect" aria-labelledby="vortex-title"><h3 id="vortex-title">Vortex connection</h3><p id="vortex-connection" class="notice" role="status" aria-live="polite">Check your game to connect with Vortex.</p><p id="vortex-profile" class="small" hidden></p><button id="vortex-setup" hidden>Set up Vortex helper</button><details id="vortex-advanced"><summary>Advanced options and helper setup</summary><div class="actions"><button id="refresh-vortex">Check connection</button><button id="export-vortex-helper">Get Vortex helper…</button></div></details><p id="vortex-operation-result" class="notice" role="status" aria-live="polite" hidden></p></section><div id="archive-review" hidden><h3>Review this download</h3><p class="small">Check where each file will go. Nothing is installed until you choose Install below.</p><p id="archive-result" class="notice archive-result" role="status" aria-live="polite"></p><p id="install-route" class="notice"></p><button id="install-recommended" class="primary">Install and format files</button><pre id="download-plan" tabindex="0">No download selected.</pre><p id="vortex-install-blockers" class="notice" role="status" hidden></p><details><summary>Advanced installation options</summary><div class="actions"><button id="install" class="primary" aria-describedby="install-recommendation">Install these files</button><button id="export">Export manual files…</button><button id="install-vortex" class="primary" aria-describedby="vortex-install-blockers vortex-install-recommendation">Install with Vortex</button><p id="vortex-install-recommendation" class="recommendation"><strong>Recommended</strong> — Vortex may deploy other pending changes in that profile.</p><button id="export-vortex">Export for Vortex…</button><p class="small">Vortex exports require the included helper extension. Follow the exported INSTALL.txt before importing the dependency packages.</p><p id="install-recommendation" class="recommendation"><strong>Recommended</strong> — Check replacement files before installing.</p></div></details></div></section>
+</section>
+<details id="backup-recovery" class="panel"><summary>Backup recovery</summary><button id="undo" class="quiet">Undo last change</button><p>Choose a saved backup to restore files changed by this app.</p><p id="previous-receipt" class="small receipt" hidden></p><button id="recover">Load backup version…</button><p id="receipt" class="small receipt" hidden></p></details>
+</main></div>
+<footer>GPL-3.0 · Based on KCD2 Dependency Checker 0.2.5, with work adapted from cgize’s KCD2 Inventory Preset Merger.</footer>
+<script src="locales.js"></script><script src="i18n.js"></script><script src="dependency-art.js"></script><script src="renderer.js"></script><script src="button-help.js"></script><script src="console-ui.js"></script>
+</body></html>

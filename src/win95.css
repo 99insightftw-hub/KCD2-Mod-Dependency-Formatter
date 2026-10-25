@@ -1,0 +1,156 @@
+/* Classic square desktop controls. The help portal stays in the top layer. */
+@font-face{font-family:Silkscreen;src:url('fonts/Silkscreen-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+:root{--accent-yellow:#d8cf97;--accent-yellow-hover:#e5ddb2;--accent-yellow-light:#f5efcf;--accent-yellow-shadow:#928b60;color-scheme:light;--bg:#191919;--panel:#c0c0c0;--line:#808080;--text:#111;--muted:#333;--gold:#800000;--gold-dark:#ffffc0;--good:#494000;--bad:#9b0000;--blue:#800000;--orange:#d42027}
+*{border-radius:0!important}
+body{background-color:#141617;background-image:url('assets/app/pixel-chains.svg');background-size:16px 16px;background-repeat:repeat;color:#111;font:13px/1.55 Tahoma,'MS Sans Serif',Arial,sans-serif}
+.masthead,.console-shell,footer{max-width:1280px}
+.masthead{margin-top:16px;margin-bottom:16px;padding:12px 14px;gap:12px;background:#800000;border:2px solid;border-color:#fff #101010 #101010 #fff;box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080,3px 3px #000}
+.masthead:after{display:none}.brand-mark{width:64px;height:64px;flex:0 0 64px;background:transparent;border:0;box-shadow:none}
+.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.header-icon{display:block;width:96px;height:96px;flex:0 0 96px;align-self:flex-start;margin-left:auto;object-fit:contain;image-rendering:pixelated}
+@media(max-width:700px){.header-icon{width:64px;height:64px;flex-basis:64px}}
+.brand-mark span{color:#111;font:16px Silkscreen,monospace;letter-spacing:0}.eyebrow{font:12px Silkscreen,monospace;color:#fff1a0;letter-spacing:0;margin-bottom:5px}
+h1,h2,h3{font-family:Silkscreen,Tahoma,sans-serif;font-weight:400;letter-spacing:0;font-style:normal}h1{font-size:24px;color:#fff;line-height:1.3}h2{font-size:18px;color:#fff;line-height:1.5}h3{font-size:16px;color:#111}.intro{color:#fff0d4;font-size:13px;margin-top:5px}.system-caption{color:var(--accent-yellow);font:12px Silkscreen,monospace;letter-spacing:0}.version{background:#c0c0c0;color:#111;border:2px solid;border-color:#808080 #fff #fff #808080;box-shadow:inset 1px 1px #111;padding:4px 8px;font:13px 'Courier New',monospace}
+.console-shell{grid-template-columns:204px minmax(0,1fr);gap:16px;padding:0 16px}.console-menu{top:16px;background:#c0c0c0;padding:5px 8px 12px;border:2px solid;border-color:#fff #111 #111 #fff;box-shadow:inset -1px -1px #808080,3px 3px #000}
+.menu-caption{font:13px Silkscreen,monospace;color:#fff;background:#800000;padding:7px 5px;margin:0 -4px 12px;letter-spacing:0}.console-menu>.button-help-pair{gap:6px;margin-bottom:10px!important}.console-menu .console-nav-button{font:13px/1.5 Silkscreen,monospace;padding:8px 5px}.menu-number{font:13px 'Courier New',monospace;color:#800000;margin-right:3px}.console-nav-button[aria-current],.console-nav-button[aria-current]:hover:not(:disabled){background:var(--accent-yellow);color:#111;border-color:var(--accent-yellow-shadow) var(--accent-yellow-light) var(--accent-yellow-light) var(--accent-yellow-shadow);box-shadow:inset 1px 1px var(--accent-yellow-shadow)}.console-nav-button[aria-current] .menu-number{color:#800000}.menu-help{color:#222;border-top:2px groove #fff;padding-top:10px;font-size:12px}.menu-help strong{color:#800000}
+.panel{background:#c0c0c0;padding:8px 18px 18px;border:2px solid;border-color:#fff #111 #111 #fff;box-shadow:inset -1px -1px #808080,3px 3px #000;margin-bottom:18px;scroll-margin-top:16px}
+.section-heading{background:#800000;margin:0 -12px 18px;padding:8px 10px;gap:10px;border:0;color:#fff}.section-heading p{color:#fff4d4;font-size:13px;margin-top:4px}.section-heading .eyebrow{color:var(--accent-yellow);font-family:Silkscreen,monospace;font-size:12px}.step{width:28px;height:28px;flex-basis:28px;background:var(--accent-yellow);color:#111;outline:0;border:2px solid;border-color:var(--accent-yellow-light) var(--accent-yellow-shadow) var(--accent-yellow-shadow) var(--accent-yellow-light);box-shadow:1px 1px #000;font:16px Silkscreen,monospace}
+label{color:#111;font-size:13px}input,select{padding:9px;background:#fff;color:#111;border:2px solid;border-color:#808080 #fff #fff #808080;box-shadow:inset 1px 1px #111;font:13px Tahoma,Arial,sans-serif}input::placeholder{color:#555}
+button{background:#c0c0c0;color:#111;border:2px solid;border-color:#fff #111 #111 #fff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf;font:13px/1.4 Tahoma,Arial,sans-serif;padding:8px 12px}
+button:hover:not(:disabled){background:#d4d4d4;color:#111;border-color:#fff #111 #111 #fff}button:active:not(:disabled){border-color:#111 #fff #fff #111;box-shadow:inset 1px 1px #808080;transform:none}
+button.primary{background:var(--accent-yellow);color:#111;border-color:var(--accent-yellow-light) #111 #111 var(--accent-yellow-light);box-shadow:inset -1px -1px var(--accent-yellow-shadow),inset 1px 1px var(--accent-yellow-light);font-weight:700}button.primary:hover:not(:disabled){background:var(--accent-yellow-hover);color:#111;border-color:#fff #111 #111 #fff}button.quiet{background:#c0c0c0}button:disabled{opacity:.6}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,pre:focus-visible,.button-help:focus-visible{outline:1px dotted #000;outline-offset:3px}
+.panel>.status,.status{background:#d2d2d2;color:#111;border-left:3px solid #800000;padding:10px 12px}.status.error{color:#9b0000;border-color:#9b0000}.status.success{color:#494000;border-color:#8c7900}
+.dependency-card,.elfis-card,.misc-source,#rpg-controls article,#rpg-controls .rpg-control,.download-candidate,.change{background:#c0c0c0;border:2px solid;border-color:#fff #808080 #808080 #fff;box-shadow:none;padding:14px}.elfis-card{border-left:3px solid #800000}.dependency-card p,.elfis-card p,.small,.empty,.optional-plugins>p,.downloads>p,#rpg-controls p,details>p{color:#333}.dependency-card button{font-size:13px}
+.badge{background:#dedede;color:#111;border:2px solid;border-color:#808080 #fff #fff #808080;padding:12px}.badge strong{font:700 17px Tahoma,Arial,sans-serif}.badge.good{background:#fff2a0;color:#332900;border-color:#9b8500}.badge.bad{background:#ffd3d3;color:#790000;border-color:#a63c3c}.badge.warn{background:#ffffc0;color:#4b3800;border-color:#a18b35}.badge.optional-absent{background:#d0d0d0;color:#333}.badge.optional-absent strong{color:#333}.requirement,.warning-heading{color:#800000!important}.receipt{color:#494000}
+.warning,.findings-panel{background:#ffffc0;color:#4b3800;border-color:#9c8937}.finding{border-color:#b1a260}.finding p{color:#4b3800}.finding.review strong{color:#6b4400}.finding.error strong{color:#9b0000}.notice,.result-scope{background:#dedede;color:#222;border-color:#800000}.optional-plugins,.downloads,#preview-box,.runtime-evidence{border-color:#808080}
+summary{color:#800000}details{border-color:#808080}pre{background:#fff;color:#111;border:2px solid;border-color:#808080 #fff #fff #808080;box-shadow:inset 1px 1px #111;font:13px/1.6 'Courier New',monospace}.watched-folder{background:#e5e5e5;border-color:#808080;color:#111}.download-empty{border-color:#808080}.change code,.runtime-clues{font-family:'Courier New',monospace}#rpg-installed{background:#fff2a0;border-color:#9b8500}#rpg-controls input[type=range]{accent-color:#800000}#rpg-controls output{color:#800000}
+.button-help{width:22px;height:22px;flex-basis:22px;background:var(--accent-yellow);color:#111;border:2px solid;border-color:var(--accent-yellow-light) #111 #111 var(--accent-yellow-light);box-shadow:inset -1px -1px var(--accent-yellow-shadow);font:13px Silkscreen,monospace}.button-help:hover,.button-help:focus-visible{background:var(--accent-yellow-hover);color:#111;border-color:#fff #111 #111 #fff}
+.button-help-tooltip{background:#ffffc0;color:#111;border:1px solid #000;box-shadow:3px 3px #000;padding:10px 12px;font:13px/1.6 Tahoma,Arial,sans-serif}
+footer{background:#c0c0c0;border:2px solid;border-color:#fff #111 #111 #fff;color:#222;padding:8px 12px;margin-bottom:16px;font-size:12px}footer:before{display:none}
+@media(max-width:1099px){.console-menu{padding:8px;margin-bottom:16px}.menu-caption{margin:0;padding:5px}.console-menu .console-nav-button{font-size:12px;padding:8px 4px}.menu-number{font-size:12px}}
+@media(max-width:700px){.masthead{margin:8px 8px 16px;padding:10px;gap:10px}.brand-mark{width:34px;height:34px;flex-basis:34px}.brand-mark span{font-size:13px}h1{font-size:18px}h2{font-size:16px}.eyebrow{font-size:12px}.console-shell{padding:0 8px}.panel{padding:8px 14px 14px}.section-heading{margin-left:-8px;margin-right:-8px;padding:8px}.dependency-grid{grid-template-columns:1fr}footer{margin:0 8px 8px}.folder-row{flex-wrap:wrap}.folder-row>input{flex:1 1 200px}.console-menu .console-nav-button{font-size:12px}}
+button,.button-help{transition:none}
+
+:root{--good:#145c24}
+.badge.good{background:#d3efd3;color:#145025;border-color:#2d763d}.badge.bad,.badge.optional-absent{background:#ffd3d3;color:#790000;border-color:#a63c3c}.badge.optional-absent strong{color:#790000}.status.success{background:#d3efd3;color:#145025;border-color:#2d763d}.receipt,.rpg-installed-title{color:#145025}
+.launch-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:0 0 18px}.launch-row .small{margin:0;flex:1 1 220px}
+
+/* Help controls stay flat in every interaction state. */
+.button-help,.button-help:hover,.button-help:focus-visible,.button-help:active{background:var(--accent-yellow);background-image:none;border:1px solid #555;box-shadow:none}
+.button-help-tooltip{background:#ffffc0;background-image:none;border:1px solid #555;box-shadow:none}
+
+/* Three focused sections in the compact dependency-tool menu. */
+@media(max-width:1099px){.console-menu{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Dependency identity is the strongest element in each card. */
+.dependency-titlebar{display:flex;align-items:center;gap:14px;margin:-14px -14px 14px;padding:12px;background:#800000;border-left:4px solid var(--accent-yellow);min-width:0}
+.dependency-titlebar h3{color:#fff;font-family:Tahoma,Arial,sans-serif;font-weight:700;font-size:23px;line-height:1.5;margin:0;min-width:0;overflow-wrap:anywhere}
+.dependency-thumbnail{position:relative;display:grid;place-items:center;flex:0 0 98px;width:98px;height:66px;background:#111;border:1px solid #222;overflow:hidden;color:var(--accent-yellow)}
+.dependency-thumbnail img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;background:#111}
+.dependency-thumbnail-fallback{font:13px/1.4 Silkscreen,monospace;text-align:center;padding:2px;overflow-wrap:anywhere}
+.requirement-list{margin:6px 0 14px;padding-left:28px;color:#800000;list-style:decimal;overflow-wrap:anywhere}
+.requirement-list>li{display:list-item;margin:5px 0;padding-left:3px}
+@media(max-width:700px){.dependency-titlebar{gap:10px}.dependency-titlebar h3{font-size:21px}.dependency-thumbnail{flex-basis:82px;width:82px;height:58px}}
+
+/* A persistent in-app alert; never opens a modal or covers the help top layer. */
+.dependency-alert{position:sticky;top:8px;z-index:1000;margin:0 0 18px;padding:14px;background:#fff2df;color:#111;border:3px solid #b00000;box-shadow:3px 3px #000;max-height:45vh;overflow:auto;scrollbar-gutter:stable;overflow-wrap:anywhere}
+.dependency-alert>h2{margin:-14px -14px 12px;padding:10px 14px;background:#b00000;color:#fff;font-size:18px;line-height:1.45}
+.dependency-alert>p{color:#2a1b13;font-size:13px;margin:0 0 12px}
+.dependency-alert-item{padding:12px;margin:10px 0;background:#fff;border:1px solid #ba7777;color:#111}
+.dependency-alert-item>strong{display:block;font:700 17px/1.4 Tahoma,Arial,sans-serif;color:#800000}
+.dependency-alert-item p{margin:6px 0 10px;color:#222;font-size:13px}
+.dependency-alert-item.dependency-alert-prospective{border-left:4px solid #b00000}
+.dependency-alert-item.dependency-alert-unsupported{background:#ffffc0;color:#111;border-color:#9b852c}
+.dependency-alert-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.dependency-alert .actions{margin-top:12px}.dependency-alert button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.stale-review-notice{padding:12px;margin:0 0 18px;border:2px solid #9b7900;background:#ffffc0;color:#332600;font-weight:700;overflow-wrap:anywhere}
+.runtime-log{margin:0;padding:6px 0;border-top:0;border-bottom:1px solid #808080}
+.runtime-log>summary{padding:7px 5px;color:#222;font:700 13px/1.5 Tahoma,Arial,sans-serif;overflow-wrap:anywhere}
+.runtime-log>summary::marker{color:#800000}
+.runtime-log[open]>summary{background:#d2d2d2}
+.runtime-log-content{padding:4px 8px 8px 22px;color:#222}
+@media(max-width:700px){.dependency-alert{padding:12px;max-height:42vh}.dependency-alert>h2{margin:-12px -12px 10px;padding:9px 12px;font-size:16px}.dependency-alert-item{padding:10px}.dependency-alert-item>strong{font-size:16px}}
+
+/* Clear advice beside consequential choices, without hiding the action. */
+.recommendation{font:13px/1.55 Tahoma,Arial,sans-serif;color:#333;margin:8px 0;overflow-wrap:anywhere}.recommendation strong{color:#5c501e}.actions>.recommendation{flex:1 1 240px;min-width:0;margin:0}.order-startup,.manager-note{overflow-wrap:anywhere}.order-startup p,.manager-note p{margin:4px 0}.order-startup.created{background:#d3efd3;border-color:#2d763d;color:#145025}.order-startup.created .small{color:#145025}.manager-note>strong{font:700 14px/1.5 Tahoma,Arial,sans-serif}.order-reasons{margin:16px 0;border-top:1px solid #808080;padding-top:10px}.order-reason{margin:10px 0;padding:10px 12px;background:#dedede;border-left:3px solid #928b60;overflow-wrap:anywhere}.order-reason>strong{font:700 13px/1.55 Tahoma,Arial,sans-serif;color:#111}.order-reason p{margin:5px 0;color:#222}.order-reason[data-kind="required"]{border-left-color:#800000}.order-evidence{overflow-wrap:anywhere}.order-position{font-weight:700}
+
+/* Prominent author links, scoped to dependency cards. */
+.dependency-card details.author-download-options > summary {
+ display:flex; align-items:center; gap:12px; box-sizing:border-box;
+ width:100%; min-height:52px; padding:14px 16px; margin:12px 0;
+ border:2px solid #650000; background:#fff0b3; color:#650000;
+ font-size:17px; font-weight:800; line-height:1.4; cursor:pointer;
+ list-style:none; box-shadow:2px 2px 0 #777;
+}
+.dependency-card details.author-download-options > summary::-webkit-details-marker {display:none}
+.dependency-card details.author-download-options > summary::before {content:'▼';font-size:18px}
+.dependency-card details.author-download-options[open] > summary::before {content:'▲'}
+.dependency-card details.author-download-options > summary:hover {background:#ffe184}
+.dependency-card details.author-download-options > summary:focus-visible {outline:3px solid #000;outline-offset:3px}
+
+/* Simple mode leaves actions and requirement/status information visible. */
+.dependency-simple .dependency-extra,
+.dependency-simple #workshop-note,
+.dependency-simple #manager-note,
+.dependency-simple #findings-panel,
+.dependency-simple #runtime-evidence,
+.dependency-simple .result-scope {display:none !important}
+#dependencies [hidden] {display:none !important}
+#dependencies-simple[aria-pressed="true"],#dependencies-detailed[aria-pressed="true"] {background:#fff0b3;font-weight:800;border:2px solid #650000}
+
+/* Windows XP-style typography throughout the interface. */
+html body, body *, body *::before, body *::after {
+ font-family:Tahoma, Arial, sans-serif !important;
+ letter-spacing:normal !important;
+}
+h1,h2,h3,h4,.eyebrow,.system-caption,.menu-caption,.console-nav-button {
+ text-transform:none !important;
+}
+
+/* Consumer lists describe usage, not a warning. */
+.dependency-card .requirement,.dependency-card .requirement-list,.dependency-card .requirement-list > li {color:#222 !important}
+
+/* Keep the native-language selector available even on narrow windows. */
+.language-control{display:flex;flex-direction:column;gap:4px;align-self:center;flex:0 1 168px;min-width:130px;max-width:100%;color:#fff0d4;font-size:12px}
+.language-control>span{color:#fff0d4}
+#languageSelect{width:100%;max-width:100%;padding:7px;color:#111;background:#ded8c3;min-width:0}
+.masthead{flex-wrap:wrap}.brand-copy{min-width:0;overflow-wrap:anywhere}.system-stamp{max-width:200px;white-space:normal;overflow-wrap:anywhere}
+body button{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:700px){.language-control{flex-basis:168px;order:5;margin-left:auto}.header-icon{margin-left:0}.brand-copy{flex:1 1 200px}}
+
+/* Right-aligned language control and compact release badge. */
+.masthead{display:grid;grid-template-columns:64px minmax(0,1fr) auto 96px;column-gap:12px;row-gap:8px}
+.brand-mark{grid-column:1;grid-row:1}.brand-copy{grid-column:2;grid-row:1}
+.system-stamp{grid-column:3;grid-row:1;margin-left:0;max-width:160px;justify-self:end}
+.system-stamp .version{display:inline-block;min-width:54px;width:auto;padding:2px 6px;font-size:12px;line-height:1.3}
+.header-icon{grid-column:4;grid-row:1;margin-left:0;justify-self:end}
+.language-control{grid-column:3 / 5;grid-row:2;justify-self:end;width:200px;min-width:0;margin-left:0}
+.language-control>span:first-child{padding-left:28px}
+.language-options{display:flex;align-items:center;gap:8px;min-width:0}
+.language-globe{width:20px;height:20px;flex:0 0 20px;fill:none;stroke:#38bfff;stroke-width:1.5;shape-rendering:geometricPrecision}
+.language-options select{flex:1;min-width:0}
+.masthead{position:sticky;top:0;z-index:2000}
+html{scroll-padding-top:var(--header-offset,220px)}
+.console-menu{top:var(--header-offset,220px)}
+.dependency-alert{position:relative;top:auto;z-index:auto;max-height:none;overflow:visible}
+.tape-top,.tape-top img{cursor:pointer}
+.tape-top{padding:0;border:0;text-decoration:none;outline-offset:4px}
+.tape-top:focus-visible{outline:2px solid #38bfff}
+.header-icon img{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.tape-top{transform-origin:center}
+.tapes-scanning .tape-top img{animation:tape-scan 1.8s ease-in-out infinite}
+.tapes-scanning .header-icon img{animation-delay:-.9s}
+@keyframes tape-scan{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-2px) rotate(1deg)}}
+
+@media(max-width:700px){
+ .masthead{grid-template-columns:34px minmax(0,1fr) 64px;gap:8px}
+ .header-icon{grid-column:3;grid-row:1}
+ .system-stamp{display:block;grid-column:2;grid-row:2;justify-self:start;text-align:left;max-width:180px}
+ .language-control{grid-column:2 / 4;grid-row:3;width:200px;margin-left:0}
+}
+
+.files-already-found details.author-download-options > summary{width:fit-content;min-height:0;padding:4px 0;margin:8px 0;border:0;background:transparent;color:#444;font-size:12px;font-weight:400;box-shadow:none;gap:6px}
+.files-already-found details.author-download-options > summary::before{font-size:10px}
+.files-already-found details.author-download-options > summary:hover{background:transparent;color:#111;text-decoration:underline}
+.download-not-needed{color:#155724;font-weight:700}

@@ -1,0 +1,33 @@
+KCD2 Dependency Checker, copyright 2026 Elfi. GPL-3.0.
+
+Interface style (classic.css) and Steam discovery approach adapted from
+KCD2 Inventory Preset Merger, cgize and contributors, GPL-3.0.
+The tools are separate. No inventory-merging implementation is included.
+GPL license and complete checker source are supplied separately.
+
+Electron 44.5.1: MIT; Chromium and other runtime notices are supplied in
+LICENSE and LICENSES.chromium.html in the portable application folder.
+fast-xml-parser: MIT. adm-zip: MIT. yauzl: MIT.
+Their transitive dependency licenses are retained with their package contents.
+
+7za.exe is provided by 7-Zip 26.03, copyright Igor Pavlov.
+See resources/7ZIP-LICENSE.txt. 7-Zip is distributed under GNU LGPL,
+with the unRAR restriction applying to applicable components.
+Source and license information: https://www.7-zip.org/ and
+https://github.com/develar/7zip-bin .
+
+No KCSE, LuaUtils, LuaDB, KCDUtils, MCM, Address Library, PTF Extender,
+game executable, game DLL or proprietary game asset is bundled.
+Dependency author links are provided; no affiliation or endorsement is implied.
+
+Silkscreen pixel font: Copyright 2001 The Silkscreen Project Authors.
+https://github.com/googlefonts/silkscreen — SIL Open Font License 1.1.
+Unmodified font and full license included in src/fonts/.
+
+Dependency identifying thumbnails: respective creators. Author-page and image
+source credits are in src/assets/dependencies/THUMBNAIL_SOURCES.txt and
+thumbnail-sources.json. No affiliation or endorsement is implied.
+
+Pixelify Sans (dependency-name headings only): Copyright 2021 The Pixelify
+Sans Project Authors (https://github.com/eifetx/Pixelify-Sans). SIL OFL1.1;
+unmodified font and complete license in src/fonts/PixelifySans-OFL.txt.

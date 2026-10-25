@@ -1,0 +1,94 @@
+{
+  "checkedOn": "2026-10-24",
+  "purpose": "Public author-page images used as identifying thumbnails in this local tool. Original bytes retained; no affiliation or license grant implied.",
+  "items": {
+    "kcse": {
+      "file": "assets/dependencies/kcse.jpg",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3332",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3332_1783006573.jpg",
+      "author": "JerryYOJ",
+      "title": "Kingdom Come Script Extender (KCSE)",
+      "sha256": "5dccc56d7da2ed3460adbe3c8035e2f91fab0567dd8975bbc1e41ecc5a0b1ac9"
+    },
+    "addresslib": {
+      "file": "assets/dependencies/addresslib.png",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3381",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/3381/3381-1784291787-2013870836.png",
+      "author": "JerryYOJ",
+      "title": "Address Library For KCSE",
+      "sha256": "e5ae93c420602a5aaf66d6664954120741cfcde3acf954882ba4cbdd7274a47a"
+    },
+    "luautils": {
+      "file": "assets/dependencies/luautils.jpg",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3439",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3439_1785570609.jpg",
+      "author": "JerryYOJ",
+      "title": "LuaUtils",
+      "sha256": "d94c0f4e218f2e811f1d67a95218cfb9a5177acb1dc08d003630980743a6fb7b"
+    },
+    "kcdutils": {
+      "file": "assets/dependencies/kcdutils.jpg",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/2410",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/2410_1756850024.jpg",
+      "author": "Destuur",
+      "title": "KCDUtils",
+      "sha256": "b8eb54723b8625842329c36ee80eacebaf6ccac2f0f1214e50c5672820734b35"
+    },
+    "luadb": {
+      "file": "assets/dependencies/luadb.jpg",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/1523",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/1523_1742982339.jpg",
+      "author": "muyuanjin",
+      "title": "LuaDB",
+      "sha256": "194072407a0bcea4b16ac63eb2379bd2ba14ac571296ac534f7a47110bb7ba5b"
+    },
+    "mcm": {
+      "file": "assets/dependencies/mcm.webp",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3363",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3363_1783875355.jpg",
+      "author": "",
+      "title": "Mod Configuration Menu",
+      "sha256": "a71a0b114ec423efe9380834ec8dfa6c0eae5002ba652e86ab2d7a6227c8937d"
+    },
+    "ptfextender": {
+      "file": "assets/dependencies/ptfextender.webp",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3398",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3398_1784566429.jpg",
+      "author": "",
+      "title": "PTF extender",
+      "sha256": "a2c0fc902d1f0cb9d7f90a8abcd2003610d134d79e13ab91cc262e31dd353cfe"
+    },
+    "consolerpgparam": {
+      "file": "assets/dependencies/consolerpgparam.webp",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3333",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3333_1783009439.jpg",
+      "author": "",
+      "title": "Console Editable RpgParams",
+      "sha256": "9f55c7e37a0f017012be523f977109491d49f551adaf2a6b4ec596bf580ae344"
+    },
+    "soundframework": {
+      "file": "assets/dependencies/soundframework.webp",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3860",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3860_1792525311.jpg",
+      "author": "",
+      "title": "Sound Framework - Custom Sounds and Voices",
+      "sha256": "d3fe36d0150a61238d4ede0809ab16defa8325bca8044ab350ff449cefcfaf06"
+    },
+    "soundframework_asi": {
+      "file": "assets/dependencies/soundframework.webp",
+      "authorPage": "https://www.nexusmods.com/kingdomcomedeliverance2/mods/3860",
+      "imageUrl": "https://staticdelivery.nexusmods.com/mods/7286/images/headers/3860_1792525311.jpg",
+      "author": "",
+      "title": "Sound Framework - Custom Sounds and Voices",
+      "sha256": "d3fe36d0150a61238d4ede0809ab16defa8325bca8044ab350ff449cefcfaf06"
+    },
+    "asi": {
+      "file": "assets/dependencies/asi.jpg",
+      "authorPage": "https://github.com/ThirteenAG/Ultimate-ASI-Loader",
+      "imageUrl": "https://repository-images.githubusercontent.com/14176293/cda1b448-a3b0-4108-92dd-0fabef1cbbc5",
+      "author": "",
+      "title": "Ultimate ASI Loader",
+      "sha256": "64dd59bd154266e152a474288423650259bedc30b2168546ee88eeddcef59829"
+    }
+  }
+}

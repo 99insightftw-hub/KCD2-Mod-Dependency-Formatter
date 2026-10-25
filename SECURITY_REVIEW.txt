@@ -1,0 +1,28 @@
+NEXUS REVIEW NOTES
+
+Mod: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3912
+Reported quarantined file: 19354. Public version: 1.0.0.
+The notice did not identify a specific detection. No VirusTotal report was
+provided. Do not claim the quarantine is a false positive or already cleared.
+
+This new candidate packages Electron application source as ordinary files.
+It has no nested ZIP/7z/RAR/ASAR, password protection or disguised extensions.
+The optional RPG-stat editing feature and all Python/proprietary local helper
+code have been removed. Console RPG Param dependency support is retained.
+
+BUILDING.txt provides standalone build steps and upstream source links.
+package-lock.json and vendor-sha256.json pin inputs. No older app is needed.
+No saves, game binaries, installed mods, credentials, user settings or scan logs
+are included in the source tree. Tests use isolated fixture game directories.
+
+App behavior:
+- Reads supported mod manifests, file metadata and dependency archives/folders.
+- Searches common download locations with explicit bounds.
+- Opens author links at the user's request.
+- Previews file placement and installs after confirmation, with repair records.
+- Supports Vortex through a local helper/named-pipe connection.
+- Launches the game with -devmode only when the user requests it.
+
+No antivirus settings are changed. Leave the quarantined Nexus upload in place
+and ask support to review it and advise about replacing it with this candidate.
+A public source URL and sending the support email still require authorization.

@@ -1,0 +1,58 @@
+DEPENDENCY THUMBNAIL SOURCES
+
+Images belong to their respective creators. Used here as small identifying thumbnails. No affiliation or endorsement implied.
+
+kcse — Kingdom Come Script Extender (KCSE) — JerryYOJ
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3332
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3332_1783006573.jpg
+SHA256: 5dccc56d7da2ed3460adbe3c8035e2f91fab0567dd8975bbc1e41ecc5a0b1ac9
+
+addresslib — Address Library For KCSE — JerryYOJ
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3381
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/3381/3381-1784291787-2013870836.png
+SHA256: e5ae93c420602a5aaf66d6664954120741cfcde3acf954882ba4cbdd7274a47a
+
+luautils — LuaUtils — JerryYOJ
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3439
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3439_1785570609.jpg
+SHA256: d94c0f4e218f2e811f1d67a95218cfb9a5177acb1dc08d003630980743a6fb7b
+
+kcdutils — KCDUtils — Destuur
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/2410
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/2410_1756850024.jpg
+SHA256: b8eb54723b8625842329c36ee80eacebaf6ccac2f0f1214e50c5672820734b35
+
+luadb — LuaDB — muyuanjin
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/1523
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/1523_1742982339.jpg
+SHA256: 194072407a0bcea4b16ac63eb2379bd2ba14ac571296ac534f7a47110bb7ba5b
+
+mcm — Mod Configuration Menu
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3363
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3363_1783875355.jpg
+SHA256: a71a0b114ec423efe9380834ec8dfa6c0eae5002ba652e86ab2d7a6227c8937d
+
+ptfextender — PTF extender
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3398
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3398_1784566429.jpg
+SHA256: a2c0fc902d1f0cb9d7f90a8abcd2003610d134d79e13ab91cc262e31dd353cfe
+
+consolerpgparam — Console Editable RpgParams
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3333
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3333_1783009439.jpg
+SHA256: 9f55c7e37a0f017012be523f977109491d49f551adaf2a6b4ec596bf580ae344
+
+soundframework — Sound Framework - Custom Sounds and Voices
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3860
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3860_1792525311.jpg
+SHA256: d3fe36d0150a61238d4ede0809ab16defa8325bca8044ab350ff449cefcfaf06
+
+soundframework_asi — Sound Framework - Custom Sounds and Voices
+Author page: https://www.nexusmods.com/kingdomcomedeliverance2/mods/3860
+Image: https://staticdelivery.nexusmods.com/mods/7286/images/headers/3860_1792525311.jpg
+SHA256: d3fe36d0150a61238d4ede0809ab16defa8325bca8044ab350ff449cefcfaf06
+
+asi — Ultimate ASI Loader
+Author page: https://github.com/ThirteenAG/Ultimate-ASI-Loader
+Image: https://repository-images.githubusercontent.com/14176293/cda1b448-a3b0-4108-92dd-0fabef1cbbc5
+SHA256: 64dd59bd154266e152a474288423650259bedc30b2168546ee88eeddcef59829

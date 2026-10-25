@@ -1,0 +1,7 @@
+{
+  "name": "KCD2 Dependency Checker Import Helper",
+  "author": "Elfi",
+  "version": "0.2.6",
+  "description": "Connects the KCD2 formatter to Vortex for reviewed dependency import, enable and deployment, with verified results.",
+  "type": "extension"
+}

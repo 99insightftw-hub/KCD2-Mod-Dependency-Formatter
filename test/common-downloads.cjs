@@ -1,0 +1,13 @@
+'use strict';
+const fs=require('fs/promises'),path=require('path'),assert=require('assert/strict');
+const {discoverCommonDownloads,commonDownloadRoots}=require(process.argv[2]?path.resolve(process.argv[2]):'../src/download-discovery');
+(async()=>{const base=path.resolve(__dirname,'../../test-output/common-downloads-'+Date.now());const roots=['Downloads','Desktop','Documents'].map(n=>path.join(base,n));for(const r of roots)await fs.mkdir(r,{recursive:true});const put=async(r,n)=>{const p=path.join(r,n);await fs.mkdir(path.dirname(p),{recursive:true});await fs.writeFile(p,'fixture');return p;};
+await put(roots[0],'KCSE.zip');await put(roots[1],'MCM.zip');await put(roots[2],'LuaUtils.zip');await put(roots[2],'Mods/PTF Extender.7z');await put(roots[2],'private/KCSE.zip');await put(roots[2],'Mods/deep/KCSE.zip');
+assert.deepEqual(commonDownloadRoots({downloads:roots[0],desktop:roots[1],documents:roots[2],preferred:roots[1]}),[roots[1],roots[0],roots[2]]);
+let first=await discoverCommonDownloads([...roots,roots[0],path.join(base,'absent')],{now:10000});assert.equal(first.candidates.length,0);assert.equal(first.pending.length,4);assert.equal(first.folders.length,4);
+let second=await discoverCommonDownloads(roots,{now:12000,known:first.observations});assert.deepEqual(second.candidates.map(c=>c.name),['KCSE.zip','MCM.zip','LuaUtils.zip','PTF Extender.7z']);
+await fs.appendFile(path.join(roots[1],'MCM.zip'),'changing');let third=await discoverCommonDownloads(roots,{now:14000,known:second.observations});assert.equal(third.pending.length,1);assert.equal(third.candidates.length,3);
+await put(roots[1],'KCSE duplicate.zip');let fourth=await discoverCommonDownloads(roots,{now:16000,known:third.observations});fourth=await discoverCommonDownloads(roots,{now:18000,known:fourth.observations});assert.equal(fourth.candidates.filter(c=>c.dependencyHints.includes('kcse')).length,2);
+await fs.symlink(roots[0],path.join(roots[2],'Downloads linked'),'junction');let linked=await discoverCommonDownloads(roots,{now:20000,known:fourth.observations});assert(!linked.folders.some(f=>f.includes('linked')));
+for(let i=0;i<30;i++)await put(roots[2],'Mods '+i+'/KCSE.zip');let limited=await discoverCommonDownloads(roots,{now:22000});assert(limited.folders.length<=24);assert(limited.warning.includes('limit'));
+console.log(JSON.stringify({passed:true,scope:'priority, selected-folder override, root deduplication, one-level common subfolders, stable observations, duplicate versions retained, symlink avoidance, folder bounds',root:base}));})().catch(e=>{console.error(e);process.exitCode=1});

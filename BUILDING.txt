@@ -1,0 +1,46 @@
+BUILDING KCD2 MOD DEPENDENCY FORMATTER 1.0.0
+
+Requirements: Windows x64, Node.js 24.x (tested 24.15.0), npm 11.x, PowerShell.
+No game installation, Python, private toolchain or previous app is required.
+
+From this source directory:
+  npm ci --no-audit --no-fund
+  node node_modules/electron/install.js
+  node build-public.cjs ..\candidate-a
+  node build-public.cjs ..\candidate-b
+
+Use new output paths. The builder refuses to overwrite existing output.
+Compare treeSha256 in candidate-a.build.json and candidate-b.build.json.
+Two matching output inventories confirm byte-identical packaged files.
+
+The Electron installer obtains the official runtime with upstream checksums.
+package-lock.json pins npm packages. The build installs production dependencies
+with install scripts disabled, without copying from any previous formatter.
+7za.exe and its license are the only vendor inputs; SHA256 pins are recorded
+in vendor-sha256.json. 7-Zip is used to inspect supported 7z downloads.
+
+The application source is JavaScript, HTML/CSS and JSON. There is no custom
+native plugin DLL. set-app-icon.ps1 contains the complete C# source for a
+build-time icon resource editor; no compiled editor is shipped separately.
+Electron and 7-Zip are upstream executables with their own licenses/notices.
+
+The app is packaged as ordinary files under resources/app, not an ASAR archive.
+The builder rejects output containing ZIP, 7z, RAR or ASAR archives.
+The optional RPG-stat editor, Python runtime and proprietary local toolchain
+modules are excluded. Checking/installing the separate Console RPG Param
+mod remains supported; that third-party mod itself is not bundled.
+
+Checks (only isolated fixture directories are changed):
+  npm test
+
+UI fixtures are in test/. Run them with Electron and the packaged resources/app
+path. The build does not launch the actual game or install game mods.
+
+Upstream sources/documentation:
+https://www.electronjs.org/docs/latest/tutorial/application-distribution
+https://github.com/electron/electron/tree/v44.5.1
+https://www.7-zip.org/
+https://github.com/ip7z/7zip
+
+Passing these tests is not antivirus clearance or compatibility certification
+for all third-party mods. Nexus makes its own moderation decision.

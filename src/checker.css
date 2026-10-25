@@ -1,0 +1,23 @@
+*{box-sizing:border-box}body{margin:0;padding:0!important;background:#dedbd5;color:#202a35;font:14px Tahoma,Arial,sans-serif}header{position:static;transform:none;width:auto;display:block;padding:18px 24px;background:#496079;color:#fff;border-bottom:3px solid #a9b4be}h1{margin:0;font-size:23px}small{font-size:12px;font-weight:normal}header p{margin:8px 0 0}main{padding:18px;max-width:1300px;margin:auto;background:transparent}h2{font:700 16px Consolas,monospace;margin:0 0 12px}.panel{background:#efede7;border:1px solid #9a9a91;box-shadow:inset 1px 1px white,2px 2px #bab7b1;margin-bottom:16px;padding:16px}.line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}input{flex:1;min-width:280px;padding:8px;border:1px solid #777;background:white;color:#202a35}button{padding:7px 12px;cursor:pointer;font:13px Tahoma,Arial,sans-serif;color:#202a35;background:#e4e0d7;border:1px solid #777;box-shadow:inset 1px 1px #fff}button:disabled{opacity:.5;cursor:default}button.primary{background:#496079;color:white}button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid #164e80;outline-offset:2px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.card{padding:12px;background:#fffdf7;border:1px solid #aca99e}.card h3{margin:0 0 8px;font-size:14px}.card p{margin:8px 0;line-height:1.45}.badge{display:inline-block;padding:3px 8px;border:1px solid #b7b0a1;background:#eee6d7;font-size:12px}.installed{background:#dce8dc}.error,.missing,.incomplete{background:#f4ded7}.review,.disabled{background:#f4eacb}.finding{padding:10px;border-bottom:1px solid #b9b5a9}.finding strong{display:block}.finding p{margin:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}.notice{background:#e3e8ed;border:1px solid #9eacba;padding:12px;white-space:pre-wrap;line-height:1.5}details{margin-top:12px}summary{cursor:pointer;font-weight:bold;padding:5px 0}pre{max-height:300px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#faf9f4;border:1px solid #aaa;padding:12px;font:12px Consolas,monospace}#status{flex:1;overflow-wrap:anywhere;font-size:12px}footer{padding:0 20px 20px;font-size:11px;color:#4d5560;background:transparent}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+/* Focusable help follows the merger's hover/focus pattern. */
+.control-help{display:inline-flex;align-items:center;gap:5px}
+.help{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;padding:0;margin:0;border-radius:50%;flex:none;cursor:help;font:700 12px Tahoma,sans-serif;background:#fffdf7;color:#27577a;border:1px solid #7b91a1}
+.help:focus-visible{outline:2px solid #164e80;outline-offset:3px}
+.help-popup{position:fixed;z-index:10000;max-width:min(340px,calc(100vw - 24px));padding:12px;line-height:1.5;background:#fffdf4;color:#202a35;border:1px solid #496079;box-shadow:2px 3px 7px #0003;pointer-events:none}
+.help-popup[hidden]{display:none}
+#status{display:block;padding:8px 0;font-size:13px;line-height:1.5}
+#status.error{color:#9a2c20;font-weight:bold}
+#next{margin-top:4px;border-left:4px solid #496079}
+.route{padding:9px 12px;background:#faf6e7;border-left:4px solid #a88739;line-height:1.5}
+.action-group{margin:12px 0 18px;padding-bottom:10px;border-bottom:1px solid #c5c0b4}
+.action-group h3{margin:0;font-size:14px}
+.action-group p{margin:7px 0;line-height:1.5}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.card .need{font-size:12px;color:#4d5560}
+label{display:block;margin-bottom:6px;font-weight:bold}
+button:hover:not(:disabled){background:#f7f0de}
+button.primary:hover:not(:disabled){background:#38536e}
+#finding-filters button[aria-pressed="true"]{background:#496079;color:white}
+.finding[hidden]{display:none}
+#backup-state,#finding-count{font-size:13px;line-height:1.5}
+#finding-search{width:100%;min-width:0;margin:4px 0 8px}

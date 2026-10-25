@@ -1,0 +1,14 @@
+LICENSE STATUS — 2026-10-25
+
+The optional RPG editor and proprietary KCD2 toolchain helper modules have
+been removed from this public source tree and the packaged application.
+No Python runtime, guarded build/deploy module, helper source or original
+proprietary-source snapshot is included.
+
+The formatter retains its GPL-3.0 license and third-party attribution notices.
+Electron, npm packages, 7-Zip, fonts and identifying images retain their own
+licenses/attributions; GPL is not asserted over third-party branding/images.
+See LICENSE and THIRD_PARTY_NOTICES.txt.
+
+Console RPG Param is a separate dependency supported by the formatter.
+Its source or compiled mod is not bundled or relicensed here.

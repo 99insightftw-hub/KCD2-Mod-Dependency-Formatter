@@ -1,0 +1,42 @@
+'use strict';
+// Hidden renderer only: no real Vortex, imports, game writes, or visible window.
+const {app,BrowserWindow}=require('electron');
+const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path');
+const application=path.resolve(process.argv[2]||path.join(__dirname,'..'));
+const output=path.resolve(__dirname,'../../test-output/vortex-one-action-ui'+(process.argv[3]?'-'+process.argv[3]:''));
+app.commandLine.appendSwitch('disable-gpu');app.setPath('userData',path.join(output,'profile'));
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+app.whenReady().then(async()=>{
+ await fs.mkdir(output,{recursive:true});
+ const win=new BrowserWindow({show:false,width:850,height:760,webPreferences:{preload:path.join(__dirname,'desktop-order-ui-preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}});
+ win.show=win.showInactive=()=>{throw Error('Visible window forbidden');};
+ win.webContents.on('console-message',(_e,level,message)=>{if(level>=3)console.error(message);});
+ await win.loadFile(path.join(application,'src/index.html'));
+ const js=code=>win.webContents.executeJavaScript(code.includes('await ')?'(async()=>{'+code+'})()':code).catch(error=>{throw Error(error.message+' | '+code,{cause:error});});
+ const idle=async()=>{for(let n=0;n<150;n++){if(await js('typeof busy!=="undefined"&&!busy'))return;await wait(10);}throw Error('Fixture timed out');};
+ await idle();const cases=[];
+ assert(await js(`$('install-vortex').disabled&&!$('export-vortex-helper').disabled&&$('refresh-vortex').disabled`));cases.push('setup available before game scan; installation unavailable');
+ await js(`globalThis.fixtureReport={dependencies:[{id:'mcm',name:'MCM',status:'installed',requiredBy:[]}],findings:[],runtimeEvidence:{logs:[]},mods:[],vortex:{detected:true}};globalThis.fixtureBridge={connected:true,ready:true,profileId:'profile-1',profileName:'Test <img src=x>',gameRoot:'C:/fixture',message:'Connected to Vortex.'};globalThis.fixtureCalls=[];globalThis.fixtureResult={state:'completed',message:'Vortex deployment completed.',receipt:'C:/fixture/operation.json'};globalThis.fixtureFailure=null;globalThis.scanFailure=false;call=async(name)=>{fixtureCalls.push(name);if(name==='vortex-bridge-status')return fixtureBridge;if(name==='install-with-vortex'){if(fixtureFailure)throw Error(fixtureFailure);return fixtureResult;}if(name==='scan'){if(scanFailure)throw Error('fixture scan failed');return fixtureReport;}if(name==='find-downloads')return {folder:'C:/fixture',candidates:[]};if(name==='export-vortex-helper')return {destination:'C:/fixture/helper.zip'};return null;};$('game').value='C:/fixture';draw(fixtureReport);await refreshVortexBridge();sync();`);
+ assert(await js(`$('install-vortex').disabled&&$('vortex-profile').textContent.includes('Test <img src=x>')&&!$('vortex-profile img')`));cases.push('connection does not install and safely displays profile text');
+ const review=`showArchive({files:[{source:'mcm.dll',target:'C:/fixture/mcm.dll',state:'missing'}],canApply:false,blockers:['Vortex owns this target']});sync();`;
+ await js(review);assert(await js(`!$('install-vortex').disabled&&$('install').disabled`));cases.push('reviewed managed archive routes through Vortex');
+ await js(`archive.vortexBlockers=['A different loader already exists. Resolve it before installing.'];sync();fixtureCalls=[];$('install-vortex').click()`);await idle();
+ assert(await js(`$('install-vortex').disabled&&!$('vortex-install-blockers').hidden&&$('vortex-install-blockers').textContent.includes('different loader')&&!fixtureCalls.includes('install-with-vortex')&&$('vortex-install-recommendation').textContent.includes('other pending changes')`));cases.push('Vortex-specific loader blocker prevents submission and explains reason');
+ await js(review);assert(await js(`!$('install-vortex').disabled&&$('vortex-install-blockers').hidden`));
+ await js(`busy=true;sync()`);assert(await js(`$('install-vortex').disabled&&$('refresh-vortex').disabled&&$('export-vortex-helper').disabled`));await js(`busy=false;sync()`);cases.push('busy operations disable submission and setup');
+ await js(`fixtureResult={state:'needs-attention',message:'Answer the conflict prompt in Vortex.',receipt:'C:/fixture/partial.json'};fixtureCalls=[];$('install-vortex').click()`);await idle();
+ assert(await js(`fixtureCalls.filter(n=>n==='install-with-vortex').length===1&&!fixtureCalls.includes('scan')&&$('install-vortex').disabled&&$('vortex-operation-result').textContent.includes('partial.json')&&!$('status').classList.contains('success')`));cases.push('partial result retains operation record without success or retry');
+ await js(`await refreshVortexBridge();${review}fixtureFailure='Connection lost';fixtureCalls=[];$('install-vortex').click()`);await idle();
+ assert(await js(`fixtureCalls.filter(n=>n==='install-with-vortex').length===1&&!fixtureCalls.includes('scan')&&$('install-vortex').disabled&&$('vortex-operation-result').textContent.includes('unknown')`));cases.push('connection loss is unknown, never automatically retried');
+ await js(`fixtureFailure=null;fixtureResult={state:'completed',message:'Vortex deployment completed.',receipt:'C:/fixture/complete.json'};await refreshVortexBridge();${review}fixtureCalls=[];$('install-vortex').click()`);await idle();
+ assert(await js(`fixtureCalls.filter(n=>n==='install-with-vortex').length===1&&fixtureCalls.filter(n=>n==='scan').length===1&&$('status').classList.contains('success')&&$('status').textContent.includes('Dependencies checked again')&&$('vortex-operation-result').textContent.includes('complete.json')`));cases.push('completed deployment rescans once and preserves record');
+ await js(`${review}scanFailure=true;fixtureCalls=[];$('install-vortex').click()`);await idle();
+ assert(await js(`$('status').textContent.includes('Could not refresh')&&$('status').classList.contains('error')&&$('vortex-operation-result').textContent.includes('complete.json')`));cases.push('completed deployment with failed rescan reports both facts');
+ await js(`scanFailure=false;draw(fixtureReport);fixtureBridge={connected:true,ready:false,message:'Choose the matching game profile.'};await refreshVortexBridge();${review}`);
+ assert(await js(`$('install-vortex').disabled&&$('vortex-connection').textContent.includes('matching game')`));cases.push('wrong-profile connection cannot submit');
+ await js(`$('export-vortex-helper').click()`);await idle();assert(await js(`$('status').textContent.includes('Vortex Extensions')&&$('status').textContent.includes('restart Vortex')`));cases.push('helper setup uses explicit extension installation instructions');
+ await js(`fixtureBridge={connected:true,ready:true,message:'Connected.',profileName:'Test'};await refreshVortexBridge();reset();sync()`);assert(await js(`$('install-vortex').disabled&&$('vortex-profile').hidden`));cases.push('game reset discards stale readiness');
+ const layouts=[];for(const width of [1180,850,560]){win.setSize(width,760);await wait(80);await win.webContents.capturePage(undefined,{stayHidden:true});const layout=await js(`({width:innerWidth,scroll:document.documentElement.scrollWidth})`);assert(layout.scroll<=layout.width+1,JSON.stringify(layout));layouts.push(layout);}
+ assert.equal(win.isVisible(),false);await js(`$('vortex-connect').scrollIntoView({block:'start'})`);await wait(50);await fs.writeFile(path.join(output,'setup.png'),(await win.webContents.capturePage(undefined,{stayHidden:true})).toPNG());
+ const result={passed:true,cases,layouts,scope:'Hidden renderer IPC fixtures, not a live Vortex transaction'};await fs.writeFile(path.join(output,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify({passed:true,cases:cases.length,layouts}));app.quit();
+}).catch(e=>{console.error(e);app.exit(1)});
