@@ -26,7 +26,9 @@ Electron and 7-Zip are upstream executables with their own licenses/notices.
 
 The app is packaged as ordinary files under resources/app, not an ASAR archive.
 The builder rejects output containing ZIP, 7z, RAR or ASAR archives.
-The source README.txt stays in the repository; it is not included in the app package.
+Source README files stay in the repository. The builder removes all README files
+from the app package, including package documentation; license files remain.
+The optional Vortex helper export also omits README files.
 The optional RPG-stat editor, Python runtime and proprietary local toolchain
 modules are excluded. Checking/installing the separate Console RPG Param
 mod remains supported; that third-party mod itself is not bundled.

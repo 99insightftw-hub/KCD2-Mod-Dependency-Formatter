@@ -263,7 +263,7 @@ async function exportPrepared(plan,game,destination,sevenZip,{vortex=false,check
 }
 async function exportVortexHelper(file) {
   const zip=new (require('adm-zip'))();
-  for(const name of ['index.js','info.json','README.txt','bridge-host.js','bridge-protocol.js'])zip.addFile(name,await fs.readFile(path.join(__dirname,'vortex-helper',name)));
+  for(const name of ['index.js','info.json','bridge-host.js','bridge-protocol.js'])zip.addFile(name,await fs.readFile(path.join(__dirname,'vortex-helper',name)));
   const workshopBytes=await fs.readFile(path.join(__dirname,'workshop.js'));
   if(!workshopBytes.equals(await fs.readFile(path.join(__dirname,'vortex-helper/workshop.js'))))throw Error('Workshop helper source is out of date. Rebuild the formatter.');
   zip.addFile('workshop.js',workshopBytes);
@@ -273,7 +273,7 @@ async function exportVortexHelper(file) {
       if(entry.isSymbolicLink())throw Error('Linked ZIP runtime entry');
       const rel=relative?relative+'/'+entry.name:entry.name;
       if(entry.isDirectory())await includeZipRuntime(path.join(dir,entry.name),rel);
-      else if(entry.isFile())zip.addFile('node_modules/adm-zip/'+rel,await fs.readFile(path.join(dir,entry.name)));
+      else if(entry.isFile()&&!/^readme(?:\.[^/.]+)?$/i.test(entry.name))zip.addFile('node_modules/adm-zip/'+rel,await fs.readFile(path.join(dir,entry.name)));
     }
   }
   await includeZipRuntime(zipRoot);

@@ -18,11 +18,15 @@ async function main(){
  for(const n of ['main.js','preload.js','package.json','package-lock.json','LICENSE','THIRD_PARTY_NOTICES.txt','src'])await fs.cp(path.join(root,n),path.join(app,n),{recursive:true});
  // Install only locked production dependencies, without executing dependency install scripts.
  execFileSync('cmd.exe',['/d','/s','/c','npm ci --omit=dev --ignore-scripts --no-audit --no-fund'],{cwd:app,stdio:'inherit',windowsHide:true});
+ // Keep release archives free of README files, including bundled package documentation.
+ const readmes=Object.keys(await inventory(app)).filter(rel=>/^readme(?:\.[^/.]+)?$/i.test(path.basename(rel)));
+ for(const rel of readmes)await fs.unlink(path.join(app,...rel.split('/')));
  for(const n of ['7za.exe','7ZIP-LICENSE.txt'])await fs.copyFile(path.join(root,'vendor',n),path.join(output,'resources',n));
  const exe=path.join(output,pkg.productName+'.exe');await fs.rename(path.join(output,'electron.exe'),exe);
  const icon=path.join(root,'src/assets/app/kcd2-icon.ico');await fs.copyFile(icon,path.join(output,'resources/app-icon.ico'));
  execFileSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'set-app-icon.ps1'),'-Exe',exe,'-Icon',icon],{stdio:'inherit',windowsHide:true});
  const files=await inventory(output),archives=Object.keys(files).filter(n=>/\.(zip|7z|rar|asar)$/i.test(n));if(archives.length)throw Error('Nested archive present: '+archives.join(', '));
+ if(Object.keys(files).some(rel=>/^readme(?:\.[^/.]+)?$/i.test(path.basename(rel))))throw Error('README present in release');
  const receipt={version:pkg.version,format:'unpacked Electron app; no Python or RPG helper runtime',files,treeSha256:sha(Buffer.from(JSON.stringify(files))),vendorManifestSha256:sha(await fs.readFile(path.join(root,'vendor-sha256.json')))};
  await fs.writeFile(output+'.build.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({output,files:Object.keys(files).length,treeSha256:receipt.treeSha256,nestedArchives:archives}));
 }
