@@ -22,7 +22,6 @@ async function main(){
  const exe=path.join(output,pkg.productName+'.exe');await fs.rename(path.join(output,'electron.exe'),exe);
  const icon=path.join(root,'src/assets/app/kcd2-icon.ico');await fs.copyFile(icon,path.join(output,'resources/app-icon.ico'));
  execFileSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'set-app-icon.ps1'),'-Exe',exe,'-Icon',icon],{stdio:'inherit',windowsHide:true});
- await fs.copyFile(path.join(root,'README.txt'),path.join(output,'README.txt'));
  const files=await inventory(output),archives=Object.keys(files).filter(n=>/\.(zip|7z|rar|asar)$/i.test(n));if(archives.length)throw Error('Nested archive present: '+archives.join(', '));
  const receipt={version:pkg.version,format:'unpacked Electron app; no Python or RPG helper runtime',files,treeSha256:sha(Buffer.from(JSON.stringify(files))),vendorManifestSha256:sha(await fs.readFile(path.join(root,'vendor-sha256.json')))};
  await fs.writeFile(output+'.build.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({output,files:Object.keys(files).length,treeSha256:receipt.treeSha256,nestedArchives:archives}));
