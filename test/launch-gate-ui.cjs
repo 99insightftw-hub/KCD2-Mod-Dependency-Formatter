@@ -21,6 +21,8 @@ app.whenReady().then(async()=>{await fs.mkdir(output,{recursive:true});const win
  await check('Workshop activation uncertainty is neutral',"$('launch-status').textContent==='Workshop mods detected.'&&$('launch-needs').children.length===0");
  await js("draw({dependencies:[{id:'mcm',name:'MCM',status:'incomplete'}],findings:[]});sync();void 0");
  await check('real dependency issue is named',"$('launch-status').textContent==='Items to check'&&$('launch-needs').textContent.includes('MCM — Incomplete')");
+ await js("draw({mods:[{id:'testconsumer',name:'Test Consumer'}],dependencies:[{id:'mcm',name:'Mod Configuration Menu (MCM)',status:'incomplete',missingNativeFile:'MCM.dll',requiredBy:['testconsumer']}],findings:[]});sync();void 0");
+ await check('removed plugin names missing DLL and direct author download',"$('launch-status').textContent==='Plugin file missing'&&$('launch-needs').textContent.includes('MCM.dll is missing from KCSE/Plugins')&&$('dependency-alert').textContent.includes('Test Consumer requires Mod Configuration Menu (MCM)')&&[...$('dependency-alert').querySelectorAll('button')].some(b=>b.textContent==='Download Mod Configuration Menu (MCM)')");
  await js("draw({dependencies:[{id:'kcse',status:'installed'}],findings:[],workshop:{detected:true,pending:true}});sync();void 0");
  await check('pending Workshop downloads give concrete instruction',"$('launch-needs').textContent.includes('Steam is downloading mods. Wait for it to finish.')");
  await js("draw({dependencies:[{id:'kcse',status:'installed'}],findings:[]});monitoringIncomplete=true;sync();void 0");

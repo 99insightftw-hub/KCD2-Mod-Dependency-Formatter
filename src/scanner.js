@@ -367,6 +367,7 @@ async function scan(input,{modsPath=null,workshopPath=null,scope=null,activateLo
          }
        }
        present=native.length>0&&resource;status=present?'installed':native.length||providers.length?'incomplete':'missing';
+      if(!native.length&&enabled.length)detail=`No usable ${c.files[0]} was found in KCSE/Plugins. Download or restore the complete ${c.name} package.`;
       if(native.length&&!resource)detail+=' Its required mod resources/bootstrap were not found in an enabled provider.';
     }else {
       present=enabled.some(m=>m.entries.some(e=>/^Scripts\/Mods\/kcdutils\.lua$/i.test(e))&&m.entries.some(e=>/^Scripts\/Mods\/KCDUtils\//i.test(e)));
@@ -403,7 +404,7 @@ async function scan(input,{modsPath=null,workshopPath=null,scope=null,activateLo
       detail+=conflicting.length?' A matching display name has a conflicting explicit mod ID. Review the author manifest.':(uncertainWorkshop?' Local and/or Workshop provider copies were found. Workshop activation is unknown; review possible duplicates before continuing.':' Multiple active providers or native copies were found. Review the duplicates before continuing.');
     }
     const requiredBy=requirements.filter(r=>r.active&&r.target===c.id&&r.kind!=='optional').map(r=>r.consumer);
-    dependencyRows.push({...c,status,present,detail,reviewReason,filesFound:providers.length>0||foundNative.length>0,nativePresent:native.length>0,needsNativePlacement:workshopNative.length>0&&!native.length,needsActivationCheck:uncertainWorkshop,conditionalRequiredBy:[...new Set(requirements.filter(r=>r.active===null&&r.target===c.id&&r.kind!=='optional').map(r=>r.consumer))],providers:providers.map(m=>({id:m.id,folder:m.folder,root:m.root,active:m.active,activationState:m.activationState,source:m.source,workshop:m.workshop,workshopItemId:m.workshopItemId,workshopUrl:m.workshopUrl,workshopState:m.workshopState,version:m.version})),files:[...foundNative.map(b=>b.file),...(c.id==='addresslib'?addresses.map(a=>a.file):[])],requiredBy:[...new Set(requiredBy)]});
+    dependencyRows.push({...c,status,present,detail,reviewReason,missingNativeFile:c.kind==='plugin'&&status==='incomplete'&&!native.length&&enabled.length&&!uncertainWorkshop&&!binaries.some(b=>b.dependency===c.id&&b.active!==false)?c.files[0]:null,filesFound:providers.length>0||foundNative.length>0,nativePresent:native.length>0,needsNativePlacement:workshopNative.length>0&&!native.length,needsActivationCheck:uncertainWorkshop,conditionalRequiredBy:[...new Set(requirements.filter(r=>r.active===null&&r.target===c.id&&r.kind!=='optional').map(r=>r.consumer))],providers:providers.map(m=>({id:m.id,folder:m.folder,root:m.root,active:m.active,activationState:m.activationState,source:m.source,workshop:m.workshop,workshopItemId:m.workshopItemId,workshopUrl:m.workshopUrl,workshopState:m.workshopState,version:m.version})),files:[...foundNative.map(b=>b.file),...(c.id==='addresslib'?addresses.map(a=>a.file):[])],requiredBy:[...new Set(requiredBy)]});
   }
   const needed=new Set(dependencyRows.filter(d=>d.present||d.requiredBy.length).map(d=>d.id));
   for(let changed=true;changed;) {changed=false;for(const c of catalog.filter(c=>needed.has(c.id)))for(const target of c.requires) {

@@ -38,7 +38,7 @@ function drawLaunchStatus(checking){
  const incompleteWorkshop=report.workshop?.complete===false||report.workshop?.items?.some(i=>i.state==='missing');
  for(const item of issues){
   const row=el('li'),name=el('span',item.name||item.id);name.translate=false;
-  const explanation=unverifiedVersion(item)?versionCheckText(item):item.needsNativePlacement||item.reviewReason==='workshop-native-placement'?'Files found — native plugin needs installation':['review','blocked'].includes(item.status)?item.detail||'Check the author’s installation instructions.':labels[item.status]||item.detail||'Check the author’s installation instructions.';
+  const explanation=item.missingNativeFile?`${item.missingNativeFile} is missing from KCSE/Plugins.`:unverifiedVersion(item)?versionCheckText(item):item.needsNativePlacement||item.reviewReason==='workshop-native-placement'?'Files found — native plugin needs installation':['review','blocked'].includes(item.status)?item.detail||'Check the author’s installation instructions.':labels[item.status]||item.detail||'Check the author’s installation instructions.';
   row.append(name,document.createTextNode(' — '),el('span',explanation));
   details.append(row);
  }
@@ -47,7 +47,7 @@ function drawLaunchStatus(checking){
  if(recovery)details.append(el('li',report.automaticOrder.message||'Recovery needed. Undo last change will check the saved transaction before attempting recovery.'));
  if(missing.length){node.textContent=missing.some(item=>item.requiredBy?.length)?'Download required dependencies':'Dependencies for your Workshop mods';node.className='small warning';}
  else if(incomplete){node.textContent='Check not finished — choose Retry check.';}
- else if(issues.length||recovery||pendingWorkshop||incompleteWorkshop){node.textContent='Items to check';}
+ else if(issues.length||recovery||pendingWorkshop||incompleteWorkshop){node.textContent=issues.some(item=>item.missingNativeFile)?'Plugin file missing':'Items to check';}
  else if(workshop){node.textContent='Workshop mods detected.';}
  else if(report.findings?.length||reviewRows.length){node.textContent='Dependencies checked.';}
  else{node.textContent='✓ Ready to launch game';node.className='small success';}
@@ -294,6 +294,7 @@ function drawDependencyAlert(value,rows){
   let guidance='Download this dependency from its author.';
   if(unverifiedVersion(row))guidance=versionCheckText(row);
   else if(row.status==='review')guidance=row.reviewReason==='duplicate-providers'?'Multiple copies found. Review which copy you use.':row.reviewReason==='identity-conflict'?'The files do not match this dependency. Check the author’s instructions.':row.needsNativePlacement?'Download the author’s files to install this plugin.':'Files found. Review the installation details.';
+  else if(row.missingNativeFile)guidance=`${row.missingNativeFile} is missing from KCSE/Plugins. Download the complete plugin from its author.`;
   else if(row.status==='disabled')guidance='Files found, but this dependency is not in the mod list.';
   else if(['incomplete','located','misplaced','blocked','ambiguous'].includes(row.status))guidance='Check the files and repair this dependency.';
   item.append(el('p',context+' '+guidance));
@@ -311,6 +312,9 @@ function drawDependencyAlert(value,rows){
   }else if(row.status==='disabled'){
    const button=el('button','Show installation details');button.dataset.help='Show why this dependency is not enabled. Nothing changes.';
    button.addEventListener('click',()=>{if(!busy){setDependencyMode(true);$('findings-details').open=true;$('plugins-panel').scrollIntoView({block:'start'});}});actions.append(button);
+  }else if(row.missingNativeFile){
+   const button=el('button','Download '+(row.name||row.id));button.dataset.help='Open the author’s download page. Nothing is installed.';
+   button.addEventListener('click',()=>run(()=>call('open-nexus',row.id)));actions.append(button);
   }else if(['incomplete','located','misplaced','blocked','ambiguous'].includes(row.status)){
    const button=el('button','Repair dependency');button.dataset.help='Choose the author’s ZIP or 7z and review its files before installing.';
    button.addEventListener('click',()=>{if(!busy)$('download').click();});actions.append(button);
